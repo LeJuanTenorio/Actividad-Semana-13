@@ -48,24 +48,34 @@ const render = async () => {
         const nombre = event.target.nombre.value;
         const apellido = event.target.apellido.value;
 
-
-
-        
         const usuarioEncontrado = buscarUsuario(nombre);
         if (usuarioEncontrado === null) {
             guardarUsuario(nombre, apellido);
-        } else {guardarUsuario(nombre, apellido)}})
+        } else {
+            guardarUsuario(nombre, apellido)
+        }
+        showMe();
+    })
 }
 
 const showMe = () => {
-    for (let item of localStorage) {
-        const name = JSON.parse(localStorage.getItem('nombre'));
-        const surnma = JSON.parse(localStorage.getItem('contrasena'));
-        container.appendChild(name)
-        container.appendChild(surnma);
+    container.innerHTML = ""; // clear previous content
+    const usuarios = JSON.parse(localStorage.getItem(USUARIOS));
+
+    for (const usuario of usuarios) {
+        const nombre = document.createElement("p");
+        nombre.textContent = `Nombre: ${usuario.nombre}`;
+
+
+        const apellido = document.createElement("p");
+        apellido.textContent = `Apellido: ${usuario.apellido}`;
+
+
+        const div = document.createElement("div");
+        div.appendChild(nombre);
+        div.appendChild(apellido);
+        container.appendChild(div);
     }
-}
+};
 
 window.onload = render;
-
-showMe();
