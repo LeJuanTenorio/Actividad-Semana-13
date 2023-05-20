@@ -59,7 +59,7 @@ const render = async () => {
 }
 
 const showMe = () => {
-    container.innerHTML = ""; // clear previous content
+    container.innerHTML = ""; 
     const usuarios = JSON.parse(localStorage.getItem(USUARIOS));
 
     for (const usuario of usuarios) {
